@@ -8,7 +8,8 @@ equals는 기본적으로 해당 객체의 값이 같은지 확인하는 메소�
 - String.equals
     - 오라클의 공식 문서를 살펴보면 아래와 같이 작성되어 있다.
         ```
-        Compares this string to the specified object. The result is true if and only if the argument is not null and is a String object that represents the same sequence of characters as this object.
+        Compares this string to the specified object. 
+        The result is true if and only if the argument is not null and is a String object that represents the same sequence of characters as this object.
         ```
         간단히 번역해보면 equals를 호출한 string과 전달 받은 매개 변수의 object 객체를 비교하여 매개 변수가 null이 아니고, object 객체가 같은 문자열로 되어있다면 true를 반환한다.
         라는 말인데 쉽게 말해 object가 null이 아니고 호출한 String 객체의 문자열과 object 객체의 문자열이 일치하면 true를 반환한다는 의미이다.
@@ -41,5 +42,7 @@ equals는 기본적으로 해당 객체의 값이 같은지 확인하는 메소�
         - equals에서 객체의 정보가 중간에 수정되지 않았다는 전제하에, x.equals(y)는 몇번을 실행하던 동일한 결과를 반환해야 한다.
         - equals method는 내부적으로 x와 y가 동일한 객체인지 판별을 위해 ==를 사용한다.
         - equals method를 override 하게 되면 hashCode method 역시 함께 override 해야 한다.
+- String.equals vs Object.equals
+    - String은 Object의 equals method를 override를 하여 사용하고 있는데, override를 하면서 내부적으로 전달 받은 매개 변수가 String 이 맞는지 그리고 문자열의 길이가 동일한지를 비교하고, 마지막으로 실제 문자열을 한글자씩 비교하게된다.
 
 ## 2. Object.equals vs hashcode
