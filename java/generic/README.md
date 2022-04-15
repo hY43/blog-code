@@ -97,6 +97,63 @@ public class GenericTest {
 그외에도 생각해보면, 타입을 직접 명시하기 때문에 *<span style="color:red">유지보수 시에 그 타입을 직접 눈으로 확인할 수 있다</span>* 는 부분도 장점이 될 것같습니다.
 
 ## 2. Wildcard Generic
+> 아래 예제는 자바의 신 3판(이상민 저)를 참고하여 작성하였습니다. 좀더 자세한 내용은 자바의 신을 참조 바랍니다.
 
+wildcard generic이란 기존의 generic 타입을 정확하게 명시했다면, 그렇게 사용할 수 없는 상황에서 타입을 제한하지 않고 generic을 사용할 수 있도록 **타입 대신 ? 문자를 사용**하는 것을 말합니다.
 
-## 3. Generic vs Wildcard Generic
+그런데 타입 형변환에 대해 명시적으로 사용하기 위해 generic을 사용하는데, 굳이 타입을 명확하게 둘 수 없는 wildcard generic을 사용하는 이유가 뭘까요?
+
+한 가지 예를 을어 사례를 확인해보면 아래와 같습니다.
+```java
+// WildcardGeneric.java
+public class WildcardGeneric<T> {
+    private T object;
+
+    public T getObject() {
+        return object;
+    }
+
+    public void setObject(T object) {
+        this.object = object;
+    }
+}
+
+// WildcardGenericMain.java
+public class WildcardGenericMain {
+    public static void main(String[] args) {
+        WildcardGenericMain main = new WildcardGenericMain();
+        WildcardGeneric<String> generic = new WildcardGeneric<String>();
+        generic.setObject("object");
+        main.checkGenericMethod(generic);
+    }
+
+    public void checkGenericMethod(WildcardGeneric<String> generic) {
+        System.out.println(generic.getObject());
+    }
+}
+```
+위의 상황에서 만약 Integer 타입으로 선언된 WildcardGeneric<Integer>를 사용하기는 어려운 부분이 있습니다.
+이때 아래와 같이 wildcard generic을 사용하면 아래와 같이 처리할 수 있습니다.
+
+```java
+// WildcardGenericMain.java
+public class WildcardGenericMain {
+    public static void main(String[] args) {
+        WildcardGenericMain main = new WildcardGenericMain();
+        WildcardGeneric<String> generic = new WildcardGeneric<String>();
+        generic.setObject("object");
+        main.checkGenericMethod(generic);
+    }
+
+    public void checkGenericMethod(WildcardGeneric<?> generic) {
+        Object value = generic.getObject();
+        if(value instanceof String) {
+            System.out.println(generic.getObject());    
+        } else if (value instanceof Integer) {
+            System.out.println(generic.getObject());
+        }
+    }
+}
+```
+
+위와 같은 상황에서 사용을 주로 하기 때문에 wildcard generic은 일반적인 지역변수 보다는 메소드의 매개 변수에 주로 사용합니다.
