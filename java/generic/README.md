@@ -1,6 +1,8 @@
 # Generic
 
-> 이 문서에서는 java 1.8을 기준으로 작성되었습니다.
+> 이 문서에서는 java 1.8을 기준으로 작성되었으며, 아래의 내용을 다루고 있습니다.
+>   - 그래서 Generic은 왜 쓰는데?
+>   - wildcard generic 은 generic이랑 무슨 차이고 왜 쓰는데?
 
 ## 1. Generic을 왜 사용하지?
 [오라클의 튜토리얼 문서](https://docs.oracle.com/javase/tutorial/java/generics/why.html) 에 따르면 아래 3가지 이유 정도가 Generic 을 사용해서 얻을 수 있는 이득이라고 합니다.
