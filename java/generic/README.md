@@ -157,3 +157,30 @@ public class WildcardGenericMain {
 ```
 
 위와 같은 상황에서 사용을 주로 하기 때문에 wildcard generic은 일반적인 지역변수 보다는 메소드의 매개 변수에 주로 사용합니다.
+
+어떤 타입이던 받을 수 있기 때문에 좀더 명확한 조건을 위해 아래와 같이 제한을 둘 수도 있습니다.
+```java
+// WildcardGenericMain.java
+public class WildcardGenericMain {
+    public static void main(String[] args) {
+        WildcardGenericMain main = new WildcardGenericMain();
+        WildcardGeneric<String> generic = new WildcardGeneric<String>();
+        generic.setObject("object");
+        main.checkGenericMethod(generic);
+    }
+
+    public void checkGenericMethod(WildcardGeneric<? extends Object> generic) {
+        Object value = generic.getObject();
+        if(value instanceof String) {
+            System.out.println(generic.getObject());    
+        } else if (value instanceof Integer) {
+            System.out.println(generic.getObject());
+        }
+    }
+}
+```
+? 뒤에 extends 키워드를 둬서 해당 클래스의 확장 클래스만 사용할 수 있다라는 제약을 둘 수도 있습니다.
+
+```
+정리해보면 generic은 기본적으로 형 변환에 대한 이득을 취하기 위해 사용되는데, 메소드의 매개변수에 대해서는 여러 타입을 받아야한다면 wildcard generic을 사용하여 좀더 폭넓게 사용할 수 있습니다.
+```
